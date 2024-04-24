@@ -9,3 +9,34 @@
   2. Write a <head> and <body>.
   3. Link this file to `index.js`, so that the browser loads that file **after** loading the <body>.
 -->
+
+<!-- This preamble tells the browser that our document type is HTML. (I'm about to write an HTML doc)
+Other doctypes are rare (used more in the past) - HTML most common doctype (often assumed to be HTML if preamble tag is missing) -->
+<!DOCTYPE html>
+
+<!-- The head tag's content is the metadata, or non-visual data of our page (e.g., language, title). -->
+<head>
+  <meta lang="en" /> <!-- No content in metadata tags, but has attributes -->
+  <title>My website!</title>
+  <!-- Script tag can have JS content directly, or have an attribute that links to a js file
+  Defer tag ensure it's not executed until all HTML is loaded; required when putting script tag in head instead of body
+  HTML file may not get read in if defer tag is not included -->
+  <script defer src="./index.js"></script>
+</head>
+
+<!-- Body tag is for visual elements. -->
+<body>
+  <!-- h1, img, div, p, a, span, etc. -->
+  <!-- h1-6 header tags (in order of decreasing imporatance) -->
+  <h1>An Introduction to HTML</h1>
+  <h2>by Angela Tolwani</h2>
+  <!-- div: divider tag -->
+  <div>
+    <h3>Some less important heading...</h3>
+  </div>
+  <!-- paragraph tag for plain text -->
+  <p>Some text...</p>
+  <img src="https://2.img-dpreview.com/files/p/E~C1000x0S4000x4000T1200x1200~articles/3925134721/0266554465.jpeg" alt="yellow bird" />
+  <!-- a tag to link -->
+  <a href="https://flatironschool.com"> Flatiron School</a>
+</body>
