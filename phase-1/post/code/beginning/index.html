@@ -9,6 +9,28 @@
 
   <body>
     <h1>POST Requests</h1>
+    <h2>Dogs</h2>
+    <ul id="dogs"></ul>
+    <h2>Cats</h2>
+    <ul id="cats"></ul>
+    <h2>Add a pet!</h2>
+    <form>
+      <label>
+        Choose a pet:
+        <select name="animal">
+          <option></option>
+          <option value="cats">Cat</option>
+          <option value="dogs">Dog</option>
+        </select>
+      </label>
+      <label>Name
+        <input name="name"/>
+      </label>
+      <label>Age
+        <input type="number" name="age"/>
+      </label>
+      <input type="submit" value="Add Pet!" />
+    </form>
   </body>
 
 </html>
