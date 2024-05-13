@@ -63,7 +63,24 @@ function addPet(animalType, appendPet) {
     const ul = document.querySelector("#"+animalType);
     const li = document.createElement("li");
     li.textContent = `${appendPet.name} (${appendPet.age})`;
-    ul.append(li);
+    // Add a delete button to the li
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "X";
+    // li.append(deleteButton);
+    ul.append(li, deleteButton);
+    handleLiClick(animalType, li, appendPet); // Insert a PATCH request
+    // Handle clicks on the delete button by making a DELETE request
+    deleteButton.addEventListener("click", event => {
+        fetch(`http://localhost:3000/${animalType}/${appendPet.id}`, {method: "DELETE"})
+        .then(response => {
+            // If the deletion was successful...
+            if (response.ok) {
+                li.remove();
+                deleteButton.remove();
+            }
+        }) // response.ok is an attribute that returns T/F
+
+    })
 };
 
 // Creates a new JS object to be posted into a json
@@ -100,8 +117,8 @@ document.querySelector("form").addEventListener("submit", event => {
     fetch("http://localhost:3000/"+animalType, {
         method: "POST",
         headers: {
-            "Content-Type": "applications/json",
-            "Accept": "application/json"
+            "Content-Type": "applications/json", // type of content sending through
+            "Accept": "application/json" // type of content getting back
         },
         body: JSON.stringify(newPetObj(animalType, petName, petAge))
     })
@@ -112,3 +129,24 @@ document.querySelector("form").addEventListener("submit", event => {
 });
 
 // 3. Try writing PATCH and DELETE requests!
+
+// PATCH request - increases age by 1 when name is clicked on
+function handleLiClick(animalType, li, pet) {
+    const id = pet.id;
+    li.addEventListener("click", event => {
+        fetch(`http://localhost:3000/${animalType}/${id}`, {
+            method: "PATCH", 
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                age: pet.age + 1
+            })
+        })
+        .then(result => result.json())
+        .then(updatedPet => {
+            li.textContent = `${updatedPet.name} (${updatedPet.age})`;
+        });
+    });        
+};
