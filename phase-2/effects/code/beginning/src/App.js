@@ -11,8 +11,21 @@
 
 */
 
+import { useEffect, useState } from "react";
+
 export default function App() {
-  const articles = [ { id: 0, title: "Why I Fetch Data", author: "Max the Beagle" } ];
+  // const articles = [ { id: 0, title: "Why I Fetch Data", author: "Max the Beagle" } ];
+  const [articles, setArticles] = useState([]);
+
+  // console.log("Fetching articles...")
+  useEffect(() => {
+    fetch("http://localhost:3000/articles")
+    .then(response => response.json())
+    .then(articlesInDb => {
+      // console.log("Updating articles...");
+      setArticles(articlesInDb);
+    });
+  }, []);
 
   return (
     <div style={{ minHeight: "100vh",
